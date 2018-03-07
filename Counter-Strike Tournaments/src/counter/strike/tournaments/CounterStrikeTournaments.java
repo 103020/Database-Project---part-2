@@ -9,13 +9,23 @@ package counter.strike.tournaments;
  *
  * @author 103020
  */
-public class CounterStrikeTournaments {
+public class CounterStrikeTournaments implements Main_Interface{
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+    }
+
+    @Override
+    public void Send(String s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Display() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
