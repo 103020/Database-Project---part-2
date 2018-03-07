@@ -10,5 +10,6 @@ package counter.strike.tournaments;
  * @author 103020
  */
 public interface Main_Interface {
-    
+    void Send(String s);
+    void Display();
 }
