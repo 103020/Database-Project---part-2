@@ -30,9 +30,20 @@ public class CounterStrikeTournaments implements Main_Interface{
             Statement st = db.createStatement();
             
             /* Object used to get a result from a database. the string needs to
-            ** be the SQL code for acquiring the desired set.
+            ** be the SQL code for acquiring the desired set. "maintains a 
+            ** cursor pointing to its current row of data."
             */            
             ResultSet rs = st.executeQuery("");
+            
+            /* A while loop, checking if there is another line in the ResultSet,
+            ** and continually loops as long as this is true. 
+            */
+            while (rs.next()){
+                // Do Work
+            }
+            // Closing ResultSet and Statement
+            rs.close();
+            st.close();
             
         } catch (Exception e) {
             // print out the exception, for debugging.
