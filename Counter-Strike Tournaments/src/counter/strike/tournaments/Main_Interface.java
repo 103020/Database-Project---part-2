@@ -9,6 +9,8 @@ package counter.strike.tournaments;
  *
  * @author 103020
  */
+
+// please add comments
 public interface Main_Interface {
     void Send(String s);
     void Display();
