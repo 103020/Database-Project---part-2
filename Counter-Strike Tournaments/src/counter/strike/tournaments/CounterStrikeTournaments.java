@@ -2,6 +2,7 @@ package counter.strike.tournaments;
 
 import org.postgresql.Driver; 
 import java.sql.*;
+import java.util.Scanner;
 
 /**
  * @author 103020
@@ -46,6 +47,30 @@ public class CounterStrikeTournaments implements Main_Interface{
         }
     }
     
+    /* Method for allowing the user to enter what information they want from the
+    ** Database, from a select few choices. Asks user for input in form of an 
+    ** int, and verifies that it's correct, else it asks user to try again.
+    ** Returns an int based on the choice made.
+    */
+    static int input(){
+        int j = 0;
+        Boolean bool = true;
+        Scanner kb = new Scanner(System.in);
+        while (bool) {
+            System.out.println("Enter the number for the option you wish to choose:");
+            System.out.println("All coaches, and the team the coach is on: 1");
+            System.out.println("All people in a specific team: 2");
+            System.out.println("All names of teams, and the number of players on each team: 3");
+            System.out.println("All teams with more wins than input number: 4");
+            j = kb.nextInt();
+            if (j <= 4 && j >= 1) {
+                bool = false;
+            } else {
+                System.out.println("Input error! Try Again");
+            }
+        }
+        return j;
+    }
  
     public static void Send(String s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
