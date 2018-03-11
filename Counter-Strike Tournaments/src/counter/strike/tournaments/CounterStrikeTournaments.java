@@ -50,8 +50,7 @@ public class CounterStrikeTournaments implements Main_Interface{
             ** the user inputs 'false'
             */
             while (cont) {
-                Send(Input());
-                Display(rs);
+                send(input());
                 
                 System.out.println("Would you like to make another request? (true/false)");
                 cont = kb.nextBoolean();   
@@ -73,17 +72,18 @@ public class CounterStrikeTournaments implements Main_Interface{
     ** int, and verifies that it's correct, else it asks user to try again.
     ** Returns an int based on the choice made.
     */
-    static int Input(){
+    static int input(){
         int j = 0;
         Boolean bool = true;
         while (bool) {
             System.out.println("Enter the number for the option you wish to choose:");
-            System.out.println("All coaches, and the team the coach is on: 1");
-            System.out.println("All people on a teams that has won at least one tournament: 2");
-            System.out.println("All names of teams, and the number of players on each team: 3");
-            System.out.println("All teams with more wins than input number: 4");
+            System.out.println("1: Print all coaches, and the team the coach is on.");
+            System.out.println("2: Print all people on a teams that has won at least one tournament.");
+            System.out.println("3: Print all names of teams, and the number of players on each team.");
+            System.out.println("4: Print all teams with more wins than input number.");
+            System.out.println("5: Print all data in the database.");
             j = kb.nextInt();
-            if (j <= 4 && j >= 1) {
+            if (j <= 5 && j >= 1) {
                 bool = false;
             } else {
                 System.out.println("Input error! Try Again");
@@ -97,21 +97,24 @@ public class CounterStrikeTournaments implements Main_Interface{
      * Input() method.
      * @param j the input number from the Input() method.
      */
-    public static void Send(int j) {
+    public static void send(int j) {
         try {
         switch (j){
             // All coaches, and the team the coach is on
             case 1: rs = st.executeQuery("SELECT * FROM PEOPLE INNER JOIN IN_TEAM " +
                     "ON PEOPLE.EMAIL=IN_TEAM.EMAIL WHERE PEOPLE.EMAIL IN (SELECT TEAMS.COACH FROM TEAMS)");
+                display(rs);
                 break;
             // All people on a teams that has won at least one tournament
             case 2: rs = st.executeQuery("SELECT * FROM PEOPLE INNER JOIN " +
                     "IN_TEAM ON PEOPLE.EMAIL=IN_TEAM.EMAIL WHERE PEOPLE.EMAIL" +
                     " IN (SELECT IN_TEAM.EMAIL FROM IN_TEAM WHERE " +
                     "IN_TEAM.T_NAME IN (SELECT TOURNAMENTS.WINNER FROM TOURNAMENTS))");
+                display(rs);
                 break;
             // All names of teams, and the number of players on each team
             case 3: rs = st.executeQuery("SELECT TEAMS.NAME, TEAMS.PLAYERS FROM TEAMS");
+                display(rs);
                 break;
             // All tournaments with at least x participating teams
             case 4: {
@@ -157,7 +160,20 @@ public class CounterStrikeTournaments implements Main_Interface{
                                 +  participants);
                     }
                 }
-                
+                break;
+            }
+            // To print all data in the database
+            case 5: {
+                System.out.println(st.executeQuery("SELECT * FROM PEOPLE").getMetaData().getTableName(1));
+                display(st.executeQuery("SELECT * FROM PEOPLE"));
+                System.out.println(st.executeQuery("SELECT * FROM IN_TEAM").getMetaData().getTableName(1));
+                display(st.executeQuery("SELECT * FROM IN_TEAM"));
+                System.out.println(st.executeQuery("SELECT * FROM TEAMS").getMetaData().getTableName(1));
+                display(st.executeQuery("SELECT * FROM TEAMS"));
+                System.out.println(st.executeQuery("SELECT * FROM IN_TOUR").getMetaData().getTableName(1));
+                display(st.executeQuery("SELECT * FROM IN_TOUR"));
+                System.out.println(st.executeQuery("SELECT * FROM TOURNAMENTS").getMetaData().getTableName(1));
+                display(st.executeQuery("SELECT * FROM TOURNAMENTS"));
                 break;
             }
             default: System.out.println("Invalid input!");
@@ -172,7 +188,7 @@ public class CounterStrikeTournaments implements Main_Interface{
      * the columns, of a ResultSet.
      * @param rs The ResultSet for which all the data should be displayed
      */
-    public static void Display(ResultSet rs) {
+    public static void display(ResultSet rs) {
         try {
             /* object used to get metadata from the ResultSet. In this case:
             ** it is used to get the amount of columns, for use in a general
