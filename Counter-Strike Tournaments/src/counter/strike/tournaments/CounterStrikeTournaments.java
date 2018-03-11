@@ -13,9 +13,9 @@ public class CounterStrikeTournaments implements Main_Interface{
      */
     public static void main(String[] args) {
         // Address, username, and password for the SQL database.
-        String url = "";
-        String username = "";
-        String password = "";
+        String url = "jdbc:postgresql://horton.elephantsql.com:5432/utiuguru";
+        String username = "utiuguru";
+        String password = "GYtteUD9M5LUYHJLGXLtREbv34OJhqZO";
         
         try {
             /* Establish a connection with the database, using the address,
@@ -33,13 +33,29 @@ public class CounterStrikeTournaments implements Main_Interface{
             ** be the SQL code for acquiring the desired set. "maintains a 
             ** cursor pointing to its current row of data."
             */            
-            ResultSet rs = st.executeQuery("");
+            ResultSet rs = st.executeQuery("SELECT * FROM PEOPLE");
+            
+            /* object used to get metadata from the ResultSet. In this case:
+            ** it is used to get the amount of columns, for use in a general
+            ** method for iterating through all the columns, (and getting their
+            ** labels as well)
+            */
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columns = rsmd.getColumnCount();
             
             /* A while loop, checking if there is another line in the ResultSet,
             ** and continually loops as long as this is true. 
             */
             while (rs.next()){
                 // Do Work
+                for (int i = 1;  i <= columns; i++) {
+                    /* Usage of rsmd to get the name of the [i] column, and the 
+                    ** data, and do that for each column
+                    */
+                    System.out.print(rsmd.getColumnName(i) + ": " 
+                            + rs.getString(i) + "\t");
+                }
+                System.out.println("");
             }
             // Closing ResultSet and Statement
             rs.close();
