@@ -35,6 +35,19 @@ public class CounterStrikeTournaments implements Main_Interface{
             */            
             ResultSet rs = st.executeQuery("SELECT * FROM PEOPLE");
             
+            PrintData(rs);
+            // Closing ResultSet and Statement
+            rs.close();
+            st.close();
+            
+        } catch (Exception e) {
+            // print out the exception, for debugging.
+            System.out.println(e);
+        }
+    }
+    
+    static void PrintData(ResultSet rs){
+        try {
             /* object used to get metadata from the ResultSet. In this case:
             ** it is used to get the amount of columns, for use in a general
             ** method for iterating through all the columns, (and getting their
@@ -57,12 +70,7 @@ public class CounterStrikeTournaments implements Main_Interface{
                 }
                 System.out.println("");
             }
-            // Closing ResultSet and Statement
-            rs.close();
-            st.close();
-            
-        } catch (Exception e) {
-            // print out the exception, for debugging.
+        } catch (Exception e){
             System.out.println(e);
         }
     }
