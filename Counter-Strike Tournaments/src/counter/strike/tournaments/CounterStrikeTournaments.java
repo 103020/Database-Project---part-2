@@ -80,7 +80,7 @@ public class CounterStrikeTournaments implements Main_Interface{
             System.out.println("1: Print all coaches, and the team the coach is on.");
             System.out.println("2: Print all people on a teams that has won at least one tournament.");
             System.out.println("3: Print all names of teams, and the number of players on each team.");
-            System.out.println("4: Print all teams with more wins than input number.");
+            System.out.println("4: Print all teams with at least (input number) participating teams.");
             System.out.println("5: Print all data in the database.");
             j = kb.nextInt();
             if (j <= 5 && j >= 1) {
@@ -120,11 +120,11 @@ public class CounterStrikeTournaments implements Main_Interface{
             case 4: {
                 // creates an arraylist to hold the names of all the tournaments
                 ArrayList<String> tournaments = new ArrayList<>();
-                System.out.println("How many wins do you wish to filter by?");
+                System.out.println("How many participating teams do you wish to filter by?");
                 // variable to hold the amount of teams the user wishes to filter by
                 int k = kb.nextInt();
                 
-                // gets al lthe names of tournaments in the database
+                // gets all the names of tournaments in the database
                 rs = st.executeQuery("SELECT TOURNAMENTS.NAME FROM TOURNAMENTS");
                 // gets the metadata of the current ResultSet
                 rsmd = rs.getMetaData();
