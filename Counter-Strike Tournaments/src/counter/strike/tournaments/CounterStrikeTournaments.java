@@ -35,7 +35,7 @@ public class CounterStrikeTournaments implements Main_Interface{
             */            
             ResultSet rs = st.executeQuery("SELECT * FROM PEOPLE");
             
-            PrintData(rs);
+            Display(rs);
             // Closing ResultSet and Statement
             rs.close();
             st.close();
@@ -46,7 +46,17 @@ public class CounterStrikeTournaments implements Main_Interface{
         }
     }
     
-    static void PrintData(ResultSet rs){
+ 
+    public static void Send(String s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * This is a method for displaying all the column labels, and the data in 
+     * the columns, of a ResultSet.
+     * @param rs The ResultSet for which all the data should be displayed
+     */
+    public static void Display(ResultSet rs) {
         try {
             /* object used to get metadata from the ResultSet. In this case:
             ** it is used to get the amount of columns, for use in a general
@@ -73,16 +83,6 @@ public class CounterStrikeTournaments implements Main_Interface{
         } catch (Exception e){
             System.out.println(e);
         }
-    }
-
-    @Override
-    public void Send(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Display() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
