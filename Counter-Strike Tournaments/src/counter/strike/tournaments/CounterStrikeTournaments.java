@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * @author 103020
  */
-public class CounterStrikeTournaments implements Main_Interface{
+public class CounterStrikeTournaments{
     static Connection db;
     static Statement st;
     /* Object used to get a result from a database. the string needs to
